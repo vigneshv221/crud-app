@@ -1,5 +1,6 @@
 const db = require("../models/index");
 
+//importing Product model as constructor for documents
 const Product = db.products;
 
 //Create and save a new product [Create operation]
@@ -10,25 +11,40 @@ exports.create = (req, res) => {
         return;
     }
 
-    //Creating a new product document
-    const product = new Product({
-        name: req.body.name,
-        productId: req.body.productId,
-        description: req.body.description,
-        price: req.body.price,
-    });
+    //Check if Product ID already exists
+    Product.exists({ productId: req.body.productId })
+        .then((result) => {
+            if (!result) {
+                //Creating a new product document
+                const product = new Product({
+                    name: req.body.name,
+                    productId: req.body.productId,
+                    description: req.body.description,
+                    price: req.body.price,
+                });
 
-    //Saving in database
-    product
-        .save(product)
-        .then((data) => {
-            res.send(data);
+                //Saving in database
+                product
+                    .save(product)
+                    .then((data) => {
+                        res.send(data);
+                    })
+                    .catch((err) => {
+                        res.status(500).send({
+                            message:
+                                err.message ||
+                                "An error occured while creating product document.",
+                        });
+                    });
+            } else {
+                res.status(400).send({ message: "Product ID already exists!" });
+            }
         })
         .catch((err) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    "An error occured while creating product document.",
+                    "An error occured while validating product ID",
             });
         });
 };
@@ -60,16 +76,12 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     const update = {
-        $set: {
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-        },
+        $set: req.body,
     };
 
-    Product.update({ productId: id }, update)
+    Product.updateOne({ productId: id }, update)
         .then((data) => {
-            if (!data) {
+            if (!data.nModified) {
                 res.status(404).send({
                     message: `Cannot update product with product ID=${id}. Please recheck the product ID`,
                 });
@@ -90,12 +102,12 @@ exports.delete = (req, res) => {
 
     Product.deleteOne({ productId: id })
         .then((data) => {
-            if (!data) {
+            if (!data.deletedCount) {
                 res.status(404).send({
                     message: `Cannot delete product with product ID=${id}. Please recheck the product ID.`,
                 });
             } else {
-                res.send({ message: "Product delted successfully." });
+                res.send({ message: "Product deleted successfully." });
             }
         })
         .catch((err) => {

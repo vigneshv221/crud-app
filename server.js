@@ -27,7 +27,7 @@ db.mongoose
 
 // / route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to CRUD app 2" });
+    res.json({ message: "Welcome to CRUD app" });
 });
 
 require("./app/routes/product.routes")(app);
