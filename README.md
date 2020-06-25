@@ -1,6 +1,9 @@
 # crud-app
 CRUD api with nodejs, express, mongodb
 
+This project is hosted at 
+https://mongocrudapp.herokuapp.com/
+
 ## How to run this project locally
 
 Clone this repository and inside the project folder,
