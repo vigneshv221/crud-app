@@ -1,4 +1,4 @@
-### crud-app
+# crud-app
 CRUD api with nodejs, express, mongodb
 
 ## How to run this project locally
@@ -15,13 +15,13 @@ If you have a cluster in MongoDB Atlas, replace the
 localhost address with the connection string given for
 connecting the cluster with the application.
 
-### Routes 
+## Routes 
 
 ## /api/products
   
-  # GET
+  ### GET
     GET method return list of all products stored in database
-  # POST
+  ### POST
     POST method creates a product document in the database.
     The body of the request must contain 
       -productId (unique) (int32)
@@ -31,14 +31,14 @@ connecting the cluster with the application.
 
 ## /api/products/:id
     
-   # UPDATE 
+   ### UPDATE 
       productId is passed in as parameter. 
       Request body must contain the value of 
       the fileds that need to be changed
       Updates the product document with the 
       given productId
     
-   # DELETE
+   ### DELETE
     productId is passed in as parameter.
     Deletes the product document with the 
     given productId
