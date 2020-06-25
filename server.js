@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const app = express();
 
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 
 //bodyparser middleware to parse requests of content-type application/json
 app.use(bodyParser.json());
