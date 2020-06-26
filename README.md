@@ -7,9 +7,9 @@ https://mongocrudapp.herokuapp.com/
 ## How to run this project locally
 
 Clone this repository and inside the project folder,
-run npm init.
+run npm install at root of project direcotry.
 After all the dependencies are installed, create a 
-.env file in th root of th project folder
+.env file in the root of the project directory
 and create environment variable 
 
 MONGO_URL = mongodb://localhost:27017/myapp
