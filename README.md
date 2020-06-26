@@ -34,7 +34,7 @@ connecting the cluster with the application.
 
 ## /api/products/:id
     
-   ### UPDATE 
+   ### PUT 
       productId is passed in as parameter. 
       Request body must contain the value of 
       the fileds that need to be changed
